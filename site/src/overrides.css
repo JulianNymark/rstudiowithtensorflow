@@ -389,9 +389,11 @@ footer.page-footer {
 
 /* Stop browser scroll-anchoring from "compensating" when a Details
    expands — that compensation is what makes content above appear to be
-   pushed upward. Anchor stays put; expansion only pushes content below. */
-.ds-details,
-.ds-details::details-content,
-.ds-details::part(details-content) {
+   pushed upward. overflow-anchor on the root element disables viewport
+   anchoring entirely (per spec, only the root can turn it off for the
+   viewport), so an expanding Details keeps its position and just pushes
+   the content below it down. This static page has no late-loading
+   content above the fold, so anchoring provides nothing here anyway. */
+html {
   overflow-anchor: none;
 }
