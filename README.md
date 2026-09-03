@@ -6,7 +6,7 @@ One-command RStudio with a TensorFlow that actually works.
 - `site/` — the friendly guide (GitHub Pages)
 
 ```sh
-nix run github:YOURNAME/rstudiowithtensorflow
+nix run github:JulianNymark/rstudiowithtensorflow
 ```
 
 Opens RStudio, wired to the right Python. Dev shell for hacking:

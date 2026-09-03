@@ -1,0 +1,397 @@
+/* App-specific styles on top of Designsystemet. Never touch .ds-* internals. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Font swap: Fraunces (classy botanical serif) for headings,
+   Inter for body, JetBrains Mono for code. */
+:root {
+  --ds-font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--ds-font-family);
+}
+
+.ds-heading,
+h1, h2, h3, h4 {
+  font-family: "Fraunces", Georgia, serif !important;
+  letter-spacing: -0.01em;
+}
+
+.codeblock pre,
+.codeblock .codeblock-label,
+code, pre {
+  font-family: "JetBrains Mono", ui-monospace, Menlo, monospace !important;
+}
+
+body {
+  margin: 0;
+  /* Monkey & monstera: deep botanical green backdrop */
+  background-color: #0a120d;
+  background-image:
+    radial-gradient(ellipse 90% 60% at 8% 12%, rgba(46, 125, 76, 0.35), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 92% 85%, rgba(46, 125, 76, 0.28), transparent 60%),
+    linear-gradient(160deg, #0a120d 0%, #101d15 45%, #080f0b 100%);
+  background-attachment: fixed;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+  position: relative;
+}
+
+/* Scattered botanical background: one fixed layer, several leaves at
+   varied positions/rotations/scales, absolutely placed inside it so they
+   scroll with the page (parent spans the full document height).
+   z-index -1 keeps them behind cards; content paints above. */
+.bg-flora {
+  position: absolute;
+  /* escape the 960px container: stretch over full viewport width */
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-leaf {
+  position: absolute;
+  opacity: 0.13;
+  color: #2e7d4c;
+}
+.bg-leaf.tl { top: 3%;    left: 1%;  transform: rotate(18deg)  scale(2.6); }
+.bg-leaf.tl2{ top: 16%;   left: 9%;  transform: rotate(-24deg) scale(1.6); opacity: 0.08; }
+.bg-leaf.tr { top: 9%;    right: 1%; transform: rotate(-28deg) scale(2.1); }
+.bg-leaf.tr2{ top: 26%;   right: 8%; transform: rotate(14deg)  scale(1.5); opacity: 0.09; }
+.bg-leaf.ml { top: 38%;   left: 0%;  transform: rotate(-12deg) scale(1.9); opacity: 0.1; }
+.bg-leaf.ml2{ top: 62%;   left: 10%; transform: rotate(30deg)  scale(1.5); opacity: 0.08; }
+.bg-leaf.mr { top: 48%;   right: 0%; transform: rotate(24deg)  scale(2.8); opacity: 0.11; }
+.bg-leaf.mr2{ top: 78%;   right: 7%; transform: rotate(-32deg) scale(1.7); opacity: 0.08; }
+.bg-leaf.bl { bottom: 20%;left: 2%;  transform: rotate(40deg)  scale(2.3); }
+.bg-leaf.br { bottom: 4%; right: 3%; transform: rotate(-9deg) scale(1.9); opacity: 0.09; }
+.bg-leaf.t3 { top: 34%;  left: 5%;  transform: rotate(-38deg) scale(1.8); opacity: 0.09; }
+.bg-leaf.t4 { top: 30%;  right: 4%; transform: rotate(41deg)  scale(1.9); opacity: 0.08; }
+.bg-leaf.m3 { top: 70%;  left: 3%;  transform: rotate(9deg)   scale(2.1); opacity: 0.1; }
+.bg-leaf.m4 { top: 24%;  left: 3%;  transform: rotate(-17deg) scale(1.6); opacity: 0.1; }
+.bg-leaf.b3 { bottom: 14%; right: 8%; transform: rotate(27deg) scale(1.6); opacity: 0.09; }
+.bg-leaf.b4 { bottom: 34%; left: 7%; transform: rotate(-42deg) scale(1.5); opacity: 0.08; }
+.bg-leaf.t5 { top: 48%;  right: 2%; transform: rotate(-5deg)  scale(1.6); opacity: 0.09; }
+.bg-leaf.m5 { top: 86%;  left: 5%;  transform: rotate(-21deg) scale(1.8); opacity: 0.09; }
+.bg-leaf.b5 { bottom: 45%; right: 5%; transform: rotate(35deg) scale(1.5); opacity: 0.07; }
+.bg-leaf.m5 { top: 86%;  left: 5%;  transform: rotate(-21deg) scale(1.7); opacity: 0.08; }
+.bg-leaf.b5 { bottom: 45%; right: 6%; transform: rotate(13deg) scale(1.7); opacity: 0.08; }
+
+.hero {
+  padding: 64px 0 40px;
+  position: relative;
+}
+
+.hero .accent {
+  color: #7fbf92;
+}
+
+/* Monkey peeking next to the title */
+.hero-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.hero-monkey {
+  flex-shrink: 0;
+  color: #d8b46a;
+  margin-top: 6px;
+  filter: drop-shadow(0 4px 12px rgba(216, 180, 106, 0.25));
+}
+
+
+.hero {
+  position: relative;
+}
+
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Cards float on the dark jungle floor */
+.card {
+  margin-block: 24px;
+  --dsc-card-background: #121d15;
+  --dsc-card-border-color: rgba(110, 180, 130, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.card > * + * {
+  margin-top: 16px;
+}
+
+.req-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px;
+  background: #182619;
+  border: 1px solid rgba(110, 180, 130, 0.25);
+  border-radius: var(--ds-border-radius-md);
+}
+
+.req-row + .req-row {
+  margin-top: 8px;
+}
+
+.req-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  color: #7fbf92;
+}
+
+.req-label {
+  flex: 0 0 11rem;
+}
+
+.req-value {
+  flex: 1;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--ds-border-radius-full);
+  background: #182619;
+  border: 1px solid #3f6b4d;
+  color: #9fd8ae;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.step-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.step-body > * + * {
+  margin-top: 12px;
+}
+
+.tinker-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.tinker-row + .tinker-row {
+  margin-top: 14px;
+}
+
+.tinker-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 1.5rem;
+  color: #9fd8ae;
+}
+
+footer.page-footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(110, 180, 130, 0.25);
+  color: rgba(200, 220, 205, 0.75);
+}
+
+/* --- Code block (editor chrome) ---------------------------------- */
+
+.codeblock {
+  border-radius: var(--ds-border-radius-md);
+  border: 1px solid rgba(110, 180, 130, 0.25);
+  overflow: hidden;
+  margin-block: 10px;
+  width: 100%;
+}
+
+.codeblock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px 4px 12px;
+  background: #10201574;
+  background-color: #102016;
+  border-bottom: 1px solid rgba(110, 180, 130, 0.25);
+}
+
+.codeblock-label {
+  font-size: 0.72rem;
+  color: #7fae8d;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.copy-btn {
+  border: none;
+  background: transparent;
+  color: #7fae8d;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--ds-border-radius-sm);
+  display: flex;
+  align-items: center;
+}
+
+.copy-btn:hover {
+  color: #c9ecd3;
+  background: rgba(110, 180, 130, 0.15);
+}
+
+.codeblock pre {
+  margin: 0;
+  background: #0b130d;
+  padding: 12px 16px;
+  overflow-x: auto;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #d4e8d8;
+}
+
+.codeblock .codeline {
+  white-space: pre;
+}
+
+/* --- Syntax highlight tokens (jungle palette) ---------------------- */
+
+.token.kwd {
+  color: #7fd6a0;
+  font-weight: 500;
+}
+.token.str {
+  color: #d8b46a;
+}
+.token.cmt {
+  color: #62806c;
+  font-style: italic;
+}
+.token.num {
+  color: #86c7e8;
+}
+
+/* --- Dark-mode overrides for Designsystemet components ------------- */
+
+/* Base text on dark */
+.container {
+  --ds-color-neutral-text-default: #d9ead9;
+  --ds-color-neutral-text-subtle: #93b29c;
+  color: var(--ds-color-neutral-text-default);
+}
+
+/* Inline code only — must NOT hit the <code> inside <pre> code blocks,
+   whose border box otherwise renders as giant "{"/"}" arcs. */
+.container :not(pre) > code {
+  background: #0b130e;
+  border: 1px solid rgba(110, 180, 130, 0.25);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: #9fd8ae;
+}
+
+.container a {
+  color: #7fc9a0;
+}
+
+/* Alerts: dark-tinted so they don't scream white */
+.container .ds-alert {
+  --ds-color-surface-default: #16241a;
+  --ds-color-surface-tinted: #1b2c20;
+  --ds-color-text-default: #d9ead9;
+  --ds-color-text-subtle: #93b29c;
+}
+
+/* Kill DS's decorative braces around pre blocks */
+.codeblock pre::before,
+.codeblock pre::after {
+  content: none !important;
+}
+
+/* Designsystemet Card scopes its own theme color (dark blue in default
+   theme). Re-tint the generic text tokens inside cards for jungle theme. */
+.card,
+.card .ds-heading,
+.card .ds-paragraph,
+.card .ds-label {
+  --ds-color-text-default: #d9ead9;
+  --ds-color-text-subtle: #93b29c;
+}
+
+.card .ds-heading {
+  color: #a8cfb2;
+}
+
+/* Remove DS's decorative braces around code blocks (defensive) */
+.codeblock pre code::before,
+.codeblock pre code::after,
+.codeblock pre::before,
+.codeblock pre::after {
+  content: none;
+}
+
+/* --- Details (FAQ / troubleshooting): dark jungle tint -------------- */
+
+.ds-details {
+  --dsc-details-background: #131f17;
+  --dsc-details-summary-background: #131f17;
+  --dsc-details-summary-background--hover: #1a2a1f;
+  --dsc-details-summary-background--open: #1a2a1f;
+  --dsc-details-border-color: rgba(110, 180, 130, 0.3);
+  --dsc-details-summary-color: #9fd8ae;
+  border: 1px solid rgba(110, 180, 130, 0.3) !important;
+  border-radius: var(--ds-border-radius-md);
+  margin: 0 !important;
+}
+
+.ds-details + .ds-details {
+  margin-top: -1px !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.ds-details:has(+ .ds-details) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ds-details summary {
+  color: #a8cfb2;
+  font-weight: 500;
+}
+
+.ds-details::details-content,
+.ds-details::part(details-content) {
+  margin-block: 0;
+}
+
+/* Grid/flex children must be allowed to shrink below content width,
+   else long code lines blow the card open on the right. */
+.row,
+.step-body,
+.codeblock {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Stop browser scroll-anchoring from "compensating" when a Details
+   expands — that compensation is what makes content above appear to be
+   pushed upward. Anchor stays put; expansion only pushes content below. */
+.ds-details,
+.ds-details::details-content,
+.ds-details::part(details-content) {
+  overflow-anchor: none;
+}

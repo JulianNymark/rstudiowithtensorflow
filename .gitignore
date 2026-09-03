@@ -1,3 +1,5 @@
 .venv/
 result
 .DS_Store
+site/node_modules/
+site/dist/
