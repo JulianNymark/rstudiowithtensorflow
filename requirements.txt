@@ -1,0 +1,5 @@
+# Official TensorFlow wheels — works on macOS (Apple Silicon + Intel),
+# Linux x86_64/aarch64, and Windows (under WSL2).
+tensorflow>=2.16,<3
+numpy
+pandas
