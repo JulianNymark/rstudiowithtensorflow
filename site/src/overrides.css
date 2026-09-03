@@ -121,14 +121,22 @@ body {
 
 /* Cards float on the dark jungle floor */
 .card {
-  margin-block: 24px;
+  margin-block: 36px;
   --dsc-card-background: #121d15;
   --dsc-card-border-color: rgba(110, 180, 130, 0.25);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 .card > * + * {
-  margin-top: 16px;
+  margin-top: 24px;
+}
+
+/* Breathing room between text segments everywhere: every paragraph
+   carries a little bottom margin. DS ships paragraphs with margin 0
+   (via :where, zero specificity), so this wins. It collapses with the
+   sibling margin-top rules above — larger wins, never doubles. */
+.container .ds-paragraph {
+  margin-block: 14px;
 }
 
 .req-row {
@@ -142,7 +150,7 @@ body {
 }
 
 .req-row + .req-row {
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .req-icon {
@@ -182,7 +190,7 @@ body {
 }
 
 .step-body > * + * {
-  margin-top: 12px;
+  margin-top: 20px;
 }
 
 .tinker-row {
@@ -192,7 +200,7 @@ body {
 }
 
 .tinker-row + .tinker-row {
-  margin-top: 14px;
+  margin-top: 24px;
 }
 
 .tinker-icon {
@@ -210,13 +218,66 @@ footer.page-footer {
   color: rgba(200, 220, 205, 0.75);
 }
 
+/* --- Monkey fact cards: photo + gradient scrim + text ------------- */
+
+.fact-card {
+  position: relative;
+  margin: 36px 0;
+  border-radius: var(--ds-border-radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(110, 180, 130, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.fact-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fact-card figcaption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 24px;
+  background: linear-gradient(
+    to top,
+    rgba(5, 10, 7, 0.92) 0%,
+    rgba(5, 10, 7, 0.75) 30%,
+    rgba(5, 10, 7, 0.25) 62%,
+    rgba(5, 10, 7, 0) 85%
+  );
+}
+
+.fact-species {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #a8cfb2;
+}
+
+.fact-text {
+  color: #e6f2e8;
+  line-height: 1.5;
+  max-width: 60ch;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.fact-credit {
+  font-size: 0.7rem;
+  color: rgba(200, 220, 205, 0.55);
+}
+
 /* --- Code block (editor chrome) ---------------------------------- */
 
 .codeblock {
   border-radius: var(--ds-border-radius-md);
   border: 1px solid rgba(110, 180, 130, 0.25);
   overflow: hidden;
-  margin-block: 10px;
+  margin-block: 20px;
   width: 100%;
 }
 
@@ -256,7 +317,7 @@ footer.page-footer {
 .codeblock pre {
   margin: 0;
   background: #0b130d;
-  padding: 12px 16px;
+  padding: 14px 18px;
   overflow-x: auto;
   font-family: ui-monospace, Menlo, Consolas, monospace;
   font-size: 0.9rem;

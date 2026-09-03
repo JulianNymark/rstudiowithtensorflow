@@ -12,9 +12,52 @@ import { PiPlantFill } from "react-icons/pi";
 import CodeBlock from "./CodeBlock.jsx";
 import { TerminalIcon } from "@navikt/aksel-icons";
 import { FaApple } from "react-icons/fa6";
+import imgCapuchin from "./assets/capuchin.jpg";
+import imgProboscis from "./assets/proboscis.jpg";
+import imgMacaque from "./assets/macaque.jpg";
+import imgMandrill from "./assets/mandrill.jpg";
+import imgSpider from "./assets/spider.jpg";
 
 const REPO = "https://github.com/JulianNymark/rstudiowithtensorflow";
 const RUN_CMD = "nix run github:JulianNymark/rstudiowithtensorflow";
+
+const FACTS = [
+  {
+    img: imgCapuchin,
+    species: "White-faced capuchin",
+    alt: "White-faced capuchin monkey sticking out its tongue",
+    fact: "Capuchins have cracked nuts with stone tools for over 3,000 years — the oldest known archaeological record of monkey tool use outside Africa.",
+    credit: "Photo: Hobbyfotowiki, CC0 (Wikimedia Commons)",
+  },
+  {
+    img: imgMacaque,
+    species: "Japanese macaque (snow monkey)",
+    alt: "Snow monkeys soaking in a volcanic hot spring in the snow",
+    fact: "Japanese macaques are the northernmost non-human primates. They survive icy winters by bathing in volcanic hot springs — the warmest spots go to the highest-ranking females.",
+    credit: "Photo: Yosemite, CC BY-SA 3.0 (Wikimedia Commons)",
+  },
+  {
+    img: imgProboscis,
+    species: "Proboscis monkey",
+    alt: "Proboscis monkey with its distinctive large nose",
+    fact: "Proboscis monkeys are champion swimmers with partially webbed feet, diving up to 20 m to escape predators — and the male's 10 cm nose doubles as an echo chamber for his calls.",
+    credit: "Photo: Charles J. Sharp, CC BY-SA 4.0 (Wikimedia Commons)",
+  },
+  {
+    img: imgMandrill,
+    species: "Mandrill",
+    alt: "Male mandrill yawning, showing colorful blue-and-red face and long canine teeth",
+    fact: "Mandrills are the largest monkeys on Earth. A dominant male's neon face is a living billboard — its colors track testosterone, so a troop of 800 sorts out rank without fighting.",
+    credit: "Photo: bobosh_t, CC BY-SA 2.0 (Wikimedia Commons)",
+  },
+  {
+    img: imgSpider,
+    species: "Geoffroy's spider monkey",
+    alt: "Spider monkey hanging in a tree canopy",
+    fact: "A spider monkey's tail is a fifth limb with fingerprint-like ridges on the underside. Swinging through the canopy, one monkey scatters ~195,000 seeds a year — a living gardener of the forest.",
+    credit: "Photo: Charles J. Sharp, CC BY-SA 4.0 (Wikimedia Commons)",
+  },
+];
 
 function App() {
   return (
@@ -25,19 +68,24 @@ function App() {
         ))}
       </div>
       <Hero />
+      <FactCard {...FACTS[0]} />
       <Requirements />
+      <FactCard {...FACTS[1]} />
       <Card2>
         <Steps />
       </Card2>
+      <FactCard {...FACTS[2]} />
       <Card2 id="windows">
         <WindowsCard />
       </Card2>
+      <FactCard {...FACTS[3]} />
       <Card2>
         <Troubleshooting />
       </Card2>
       <Card2>
         <Tinker />
       </Card2>
+      <FactCard {...FACTS[4]} />
       <Card2>
         <DeepDive />
       </Card2>
@@ -53,6 +101,19 @@ function Card2({ children, id }) {
     <Card id={id} className="card" style={{ padding: "24px 32px" }}>
       {children}
     </Card>
+  );
+}
+
+function FactCard({ img, species, alt, fact, credit }) {
+  return (
+    <figure className="fact-card">
+      <img src={img} alt={alt} loading="lazy" />
+      <figcaption>
+        <span className="fact-species">{species}</span>
+        <span className="fact-text">{fact}</span>
+        <span className="fact-credit">{credit}</span>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -104,7 +165,7 @@ function Requirements() {
   ];
   return (
     <Card2>
-      <Heading level={2} data-size="md" style={{ marginBottom: 16 }}>
+      <Heading level={2} data-size="md" style={{ marginBottom: 20 }}>
         Before you start — you need
       </Heading>
       {rows.map((r) => (
@@ -132,7 +193,7 @@ function Step({ n, title, children }) {
         <Heading level={3} data-size="sm">
           {title}
         </Heading>
-        <div style={{ marginTop: 8 }}>{children}</div>
+        <div style={{ marginTop: 12 }}>{children}</div>
       </div>
     </div>
   );
@@ -144,13 +205,13 @@ function Steps() {
       <Heading level={2} data-size="md">
         The setup (Linux and macOS)
       </Heading>
-      <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr)", gap: 40, marginTop: 16 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr)", gap: 40, marginTop: 20 }}>
         <Step n="1" title="Install Nix — one time, ~5 minutes">
           <Paragraph variant="long">
             Nix is a tool that installs software in isolated, reproducible
             packages — think "app store where every version always works".
           </Paragraph>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 12, marginBlock: 24 }}>
             <div className="os-pick" style={{ borderRadius: "var(--ds-border-radius-md)", border: "1px solid rgba(110,180,130,0.3)", padding: "14px 16px", background: "#131f17" }}>
               <Label data-size="sm" style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <FaApple aria-hidden /> I'm on macOS
@@ -288,7 +349,7 @@ function Troubleshooting() {
       <Heading level={2} data-size="md">
         It didn't work?
       </Heading>
-      <div style={{ marginTop: 8 }}>
+      <div style={{ marginTop: 12 }}>
         {rows.map((r) => (
           <Details key={r.symptom}>
             <Details.Summary>{r.symptom}</Details.Summary>
@@ -356,7 +417,7 @@ function Tinker() {
           before — nothing was ever written outside those paths.
         </Paragraph>
       </div>
-      <Paragraph data-size="sm" variant="long" style={{ color: "var(--ds-color-neutral-text-subtle)", marginTop: 16 }}>
+      <Paragraph data-size="sm" variant="long" style={{ color: "var(--ds-color-neutral-text-subtle)", marginTop: 20 }}>
         What this setup <em>doesn't</em> touch: your existing Python, R, or
         Anaconda installs. Nix packages live in <code>/nix/store</code> with
         their own libraries and never conflict with anything you already have —
